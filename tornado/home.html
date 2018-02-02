@@ -1,0 +1,58 @@
+﻿<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;">
+</head>
+
+<head>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body style="height:100%; overflow:hidden">
+	<div class="col-xs-4">
+		<div class="input-group">
+			<span class="input-group-addon">輸入一整數 n</span>
+			<input id="txt_Value" type="text" class="form-control" value="">
+		</div>
+	</div>
+	
+	<div class="col-xs-4">
+		<button id="btn_send" type="button" class="btn btn-primary">Send</button>
+	</div>
+	
+	<div class="col-xs-12" style="margin-top: 15px;">
+		<div class="panel panel-default" style="height:93%;overflow:auto;">
+		  <div class="panel-heading" style="text-align: center;">Result
+			<button style="float:right;height:28px" id="btn_clearViewBody" class="btn btn-warning btn_height" type="button"> Clear </button>
+		  </div>
+		  <div class="panel-body" id="ViewBody"></div>
+		</div>
+	</div>
+</body>
+
+</html>
+<script>
+	$("#btn_send").click(function(){
+		$.ajax
+		(
+			{
+				type: 'GET',
+				url: "http://127.0.0.1:8000/?greeting=" + $("#txt_Value").val(),
+				success: function(response, type, xhr)
+				{
+					$("#ViewBody").html(response);
+				},
+				error: function (xhr)
+				{                 
+					console.log(xhr)
+				}
+			}
+		);
+	});
+	
+	$("#btn_clearViewBody").click(function(){
+		$("#ViewBody").html("");
+	});
+</script>
